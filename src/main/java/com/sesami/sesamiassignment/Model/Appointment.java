@@ -1,15 +1,23 @@
 package com.sesami.sesamiassignment.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Data
+@Table
+@EntityListeners(AuditingEntityListener.class)
+@Data @AllArgsConstructor @NoArgsConstructor
 public class Appointment {
     @Id
     private Integer id;
