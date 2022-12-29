@@ -9,8 +9,11 @@ public class AppointmentValidator {
 
     @Autowired
     private AppointmentExistanceValidator existanceValidator;
+    @Autowired
+    private AppointmentDateValidator dateValidator;
 
     public void validate(Appointment appointment){
         existanceValidator.validate(appointment);
+        dateValidator.validate(appointment);
     }
 }

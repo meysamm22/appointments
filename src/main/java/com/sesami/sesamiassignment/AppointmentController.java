@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,12 +21,12 @@ public class AppointmentController {
     private AppointmentService service;
 
     @PostMapping()
-    public ResponseEntity<Void> process(@Valid @RequestBody List<AppointmentDto> appointmentDtos){
-        service.process(
+    public ResponseEntity<HashMap<Integer,String>> process(@Valid @RequestBody List<AppointmentDto> appointmentDtos){
+        HashMap<Integer,String> result = service.process(
                 appointmentDtos.stream().map(dto -> service.make(dto)).collect(Collectors.toList())
         );
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
 }
