@@ -12,7 +12,7 @@ public class AppointmentFactory {
                 dto.getStart(),
                 dto.getEnd(),
                 dto.getCreatedAt(),
-                dto.getUpdateAt()
+                dto.getUpdatedAt()
         );
     }
 }

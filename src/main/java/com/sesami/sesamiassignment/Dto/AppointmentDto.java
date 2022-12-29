@@ -18,8 +18,8 @@ public class AppointmentDto {
     @NotNull(message = "End date and time is mandatory")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date end;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date createdAt;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date updateAt;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    private Date updatedAt;
 }
