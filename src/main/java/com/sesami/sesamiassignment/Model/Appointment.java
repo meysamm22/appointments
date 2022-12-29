@@ -7,27 +7,28 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
 @Table
-@EntityListeners(AuditingEntityListener.class)
 @Data @AllArgsConstructor @NoArgsConstructor
 public class Appointment {
     @Id
     private Integer id;
 
+    @NotNull(message = "Start date and time is mandatory")
     private Date start;
+    @NotNull(message = "End date and time is mandatory")
     private Date end;
 
-    @CreatedDate
     private Date createdAt;
 
-    @LastModifiedDate
     private Date UpdatedAt;
 }
