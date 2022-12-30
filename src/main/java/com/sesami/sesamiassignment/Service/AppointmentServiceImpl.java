@@ -1,7 +1,6 @@
 package com.sesami.sesamiassignment.Service;
 
 import com.sesami.sesamiassignment.Dto.AppointmentDto;
-import com.sesami.sesamiassignment.Exception.AppointmentExistsException;
 import com.sesami.sesamiassignment.Exception.AppointmentValidationException;
 import com.sesami.sesamiassignment.Model.Appointment;
 import com.sesami.sesamiassignment.Repository.AppointmentRepository;
@@ -10,8 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService{
@@ -43,8 +43,21 @@ public class AppointmentServiceImpl implements AppointmentService{
     }
 
     @Override
-    public List<Appointment> list() {
-        return null;
+    public List<AppointmentDto> list(Date start, Date end) {
+        List<Appointment> appointments = repository.findAllByStartGreaterThanEqualAndEndIsLessThanEqual(start, end);
+        return mapToDtoList(appointments);
+    }
+
+    private static List<AppointmentDto> mapToDtoList(List<Appointment> appointments) {
+        return appointments.stream().map(appointment ->
+                new AppointmentDto(
+                        appointment.getId(),
+                        appointment.getStart(),
+                        appointment.getEnd(),
+                        appointment.getCreatedAt(),
+                        appointment.getUpdatedAt()
+                )
+        ).collect(Collectors.toList());
     }
 
     @Override
