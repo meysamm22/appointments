@@ -17,9 +17,8 @@ public class AppointmentDateValidator extends BaseValidator {
 
     protected void validate(Appointment appointment){
         long diff = this.getDateDiff(appointment.getStart(), appointment.getEnd(), TimeUnit.MINUTES);
-        if (diff >= MAXIMUM_APPOINTMENT_DURATION_MINUTE)
-            throw new AppointmentDateException("The appointment duration is not valid, this is more than " + MAXIMUM_APPOINTMENT_DURATION_MINUTE + " Minutes",
-                    appointment.getId());
+        if (diff >= MAXIMUM_APPOINTMENT_DURATION_MINUTE || diff < 0)
+            throw new AppointmentDateException("The appointment duration is not valid, this is more than " + MAXIMUM_APPOINTMENT_DURATION_MINUTE + " Minutes");
     }
 
     private long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {

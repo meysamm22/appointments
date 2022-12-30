@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface AppointmentService {
-    List<String> process(List<Appointment> appointments);
+    List<String> process(Appointment appointments);
     List<AppointmentDto> list(Date start, Date end);
 
     Appointment make(AppointmentDto dto);

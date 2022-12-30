@@ -12,8 +12,8 @@ import java.util.Optional;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
-    Optional<Appointment> findByStartAndEnd(Date start, Date end);
-    @Query(value = "select * from appointment u where (u.start <= :start and u.end >= :start) or (u.start <= :end and u.end >= :end) or (u.start >= :start and u.end <= :end)", nativeQuery = true)
+    Optional<Appointment> findTopByStartAndEnd(Date start, Date end);
+    @Query(value = "select * from appointment u where (u.start <= :start and u.end >= :start) or (u.start <= :end and u.end >= :end) or (u.start >= :start and u.end <= :end) limit 1", nativeQuery = true)
     Optional<Appointment> findConflicts(@Param("start") Date start, @Param("end") Date end);
     List<Appointment> findAllByStartGreaterThanEqualAndEndIsLessThanEqual(Date start, Date end);
 

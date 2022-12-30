@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController @RequestMapping("api/appointments")
 @Validated
@@ -22,10 +21,8 @@ public class AppointmentController {
     private AppointmentService service;
 
     @PostMapping()
-    public ResponseEntity<List<String>> process(@Valid @RequestBody List<AppointmentDto> appointmentDtos){
-        List<String> result = service.process(
-                appointmentDtos.stream().map(dto -> service.make(dto)).collect(Collectors.toList())
-        );
+    public ResponseEntity<List<String>> process(@Valid @RequestBody AppointmentDto appointmentDtos){
+        List<String> result = service.process(service.make(appointmentDtos));
 
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }

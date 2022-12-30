@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class AppointmentExistanceValidator extends BaseValidator {
 
     protected void validate(Appointment appointment){
-        repository.findByStartAndEnd(appointment.getStart(), appointment.getEnd())
+        repository.findTopByStartAndEnd(appointment.getStart(), appointment.getEnd())
                 .ifPresent( dbAppointment -> {
                     if (appointment.getId() == null || !dbAppointment.getId().equals(appointment.getId()))
                         throw new AppointmentExistsException("Requested Appointment is exists");

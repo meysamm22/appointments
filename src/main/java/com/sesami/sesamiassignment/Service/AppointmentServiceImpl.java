@@ -5,13 +5,19 @@ import com.sesami.sesamiassignment.Exception.AppointmentValidationException;
 import com.sesami.sesamiassignment.Model.Appointment;
 import com.sesami.sesamiassignment.Repository.AppointmentRepository;
 import com.sesami.sesamiassignment.Service.Validation.AppointmentValidator;
+import org.hibernate.annotations.OptimisticLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
+
+import static org.springframework.transaction.annotation.Isolation.REPEATABLE_READ;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService{
@@ -25,20 +31,21 @@ public class AppointmentServiceImpl implements AppointmentService{
     @Autowired
     private AppointmentValidator validator;
 
+    private static Lock lock = new ReentrantLock();
+
     @Override
-    public List<String> process(List<Appointment> appointments) {
+    public List<String> process(Appointment appointment) {
+        lock.lock();
         List<String> result = new ArrayList<>();
-        for (Appointment appointment: appointments) {
             try {
                 validator.validate(appointment);
-
                 repository.save(appointment);
                 result.add("The new appointment is Added!");
             }catch (AppointmentValidationException e){
                 result.add( "Appointment (" + appointment.getStart() + " To "+ appointment.getEnd() + ") is NOT added because of: " + e.getMessage());
             }
-        }
 
+        lock.unlock();
         return result;
     }
 
