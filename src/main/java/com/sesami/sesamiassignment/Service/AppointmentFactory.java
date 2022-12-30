@@ -13,10 +13,8 @@ public class AppointmentFactory {
     private AppointmentRepository repository;
 
     protected Appointment make(AppointmentDto dto){
-        Appointment appointment = new Appointment();
-        if (dto.getId() > 0)
-            appointment = repository.findById(dto.getId()).get();
-
+        Appointment appointment;
+        appointment = repository.findById(dto.getId()).orElse(new Appointment());
         appointment.setStart(dto.getStart());
         appointment.setEnd(dto.getEnd());
         appointment.setCreatedAt(dto.getCreatedAt());
