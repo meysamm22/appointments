@@ -26,17 +26,18 @@ public class AppointmentServiceImpl implements AppointmentService{
     private AppointmentValidator validator;
 
     @Override
-    public HashMap<Integer,String> process(List<Appointment> appointments) {
-        HashMap<Integer,String> result = new HashMap<>();
+    public List<String> process(List<Appointment> appointments) {
+        List<String> result = new ArrayList<>();
         for (Appointment appointment: appointments) {
             try {
                 validator.validate(appointment);
-                result.put(appointment.getId(), "Appointment#" +appointment.getId() + " Added!");
+
+                repository.save(appointment);
+                result.add("The new appointment is Added!");
             }catch (AppointmentValidationException e){
-                result.put(appointment.getId(), "Appointment#" +e.getAppointmentId() + " is NOT added because of: " + e.getMessage());
+                result.add( "Appointment (" + appointment.getStart() + " To "+ appointment.getEnd() + ") is NOT added because of: " + e.getMessage());
             }
         }
-        repository.saveAll(appointments);
 
         return result;
     }

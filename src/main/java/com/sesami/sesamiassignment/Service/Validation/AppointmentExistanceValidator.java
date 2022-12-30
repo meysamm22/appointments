@@ -10,7 +10,9 @@ public class AppointmentExistanceValidator extends BaseValidator {
 
     protected void validate(Appointment appointment){
         repository.findByStartAndEnd(appointment.getStart(), appointment.getEnd())
-                .ifPresent( appointment1 -> {throw new AppointmentExistsException("Requested Appointment is exists", appointment.getId());
+                .ifPresent( dbAppointment -> {
+                    if (appointment.getId() == null || !dbAppointment.getId().equals(appointment.getId()))
+                        throw new AppointmentExistsException("Requested Appointment is exists");
                 });
     }
 }
