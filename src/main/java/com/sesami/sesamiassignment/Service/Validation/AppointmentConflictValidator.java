@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AppointmentConflictValidator extends BaseValidator{
-    protected void validate(Appointment appointment){
+    public void validate(Appointment appointment){
        repository.findConflicts(appointment.getStart(), appointment.getEnd())
                .ifPresent( dbAppointment -> {
                    if (appointment.getId() == null || !dbAppointment.getId().equals(appointment.getId()))

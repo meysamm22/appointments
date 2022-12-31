@@ -28,4 +28,13 @@ public class AppointmentFixtures {
                 .UpdatedAt(dateHelper.strToDate("2020-09-02 14:23:12"))
                 .build();
     }
+
+    public Appointment getHasConflictAppointment() throws ParseException {
+        return Appointment.builder()
+                .start(dateHelper.strToDate("2020-10-10 20:15"))
+                .end(dateHelper.strToDate("2020-10-10 20:40"))
+                .createdAt(dateHelper.strToDate("2020-09-02 14:23:12"))
+                .UpdatedAt(dateHelper.strToDate("2020-09-02 14:23:12"))
+                .build();
+    }
 }
