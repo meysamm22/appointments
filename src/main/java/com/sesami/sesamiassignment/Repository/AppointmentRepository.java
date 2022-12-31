@@ -16,5 +16,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     @Query(value = "select * from appointment u where (u.start <= :start and u.end >= :start) or (u.start <= :end and u.end >= :end) or (u.start >= :start and u.end <= :end) limit 1", nativeQuery = true)
     Optional<Appointment> findConflicts(@Param("start") Date start, @Param("end") Date end);
     List<Appointment> findAllByStartGreaterThanEqualAndEndIsLessThanEqual(Date start, Date end);
+    Optional<Appointment> findFirstByOrderByIdDesc();
 
 }

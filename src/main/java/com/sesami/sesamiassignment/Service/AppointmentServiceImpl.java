@@ -5,10 +5,8 @@ import com.sesami.sesamiassignment.Exception.AppointmentValidationException;
 import com.sesami.sesamiassignment.Model.Appointment;
 import com.sesami.sesamiassignment.Repository.AppointmentRepository;
 import com.sesami.sesamiassignment.Service.Validation.AppointmentValidator;
-import org.hibernate.annotations.OptimisticLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,7 +15,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
-import static org.springframework.transaction.annotation.Isolation.REPEATABLE_READ;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService{
