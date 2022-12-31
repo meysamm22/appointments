@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service @NoArgsConstructor
 public class AppointmentExistanceValidator extends BaseValidator {
 
-    protected void validate(Appointment appointment){
+    public void validate(Appointment appointment){
         repository.findTopByStartAndEnd(appointment.getStart(), appointment.getEnd())
                 .ifPresent( dbAppointment -> {
                     if (appointment.getId() == null || !dbAppointment.getId().equals(appointment.getId()))
