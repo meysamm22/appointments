@@ -37,4 +37,22 @@ public class AppointmentFixtures {
                 .UpdatedAt(dateHelper.strToDate("2020-09-02 14:23:12"))
                 .build();
     }
+
+    public Appointment getHighRangeAppointment() throws ParseException {
+        return Appointment.builder()
+                .start(dateHelper.strToDate("2020-10-10 01:15"))
+                .end(dateHelper.strToDate("2020-10-10 20:40"))
+                .createdAt(dateHelper.strToDate("2020-09-02 14:23:12"))
+                .UpdatedAt(dateHelper.strToDate("2020-09-02 14:23:12"))
+                .build();
+    }
+
+    public Appointment getInvalidStartAndEndDateAppointment() throws ParseException {
+        return Appointment.builder()
+                .start(dateHelper.strToDate("2020-10-12 20:15"))
+                .end(dateHelper.strToDate("2020-10-10 20:40"))
+                .createdAt(dateHelper.strToDate("2020-09-02 14:23:12"))
+                .UpdatedAt(dateHelper.strToDate("2020-09-02 14:23:12"))
+                .build();
+    }
 }
