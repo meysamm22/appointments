@@ -1,0 +1,41 @@
+version: '3'
+services:
+  sesami-assignment:
+    container_name: sesami-assignment
+    image: sesami-assignment:latest
+    ports:
+      - 8000:8000
+    networks:
+      - spring-network
+    depends_on:
+      - database
+    environment:
+      spring.datasource.url: "jdbc:mysql://database:3306/sesami"
+  database:
+    image: mysql:latest
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_DATABASE=sesami
+    ports:
+      - 8088:3306
+    networks:
+      - spring-network
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_HOST: database
+      PMA_USER: root
+      PMA_PASSWORD:
+      UPLOAD_LIMIT: 1280M
+      MEMORY_LIMIT: 1280M
+      MAX_EXECUTION_TIME: 600
+    ports:
+      - 8089:80
+    networks:
+      - spring-network
+networks:
+  spring-network:
+volumes:
+  db-data:
