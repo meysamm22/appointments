@@ -13,8 +13,9 @@ All validations have their own tests. and a separated database named `sesami_tes
 You can the application by docker or your intelliJ IDE.
 ### Running With Docker (Recommended)
 1. First of all, make sure you have installed the docker and docker compose in your system.
-2. There is a bash script file that make the running project easier named `run.sh` in the project's root, so you can run it and after downloading images and building the application will be served. The docker composer will serve the main application, Mysql and phpMyAdmin.
-3. The Project will be served on port `8000` automatically, if you want change this, you can alter this on the `docker-compose.yml` file in the project`s root.
+2. Install Maven in your system (https://maven.apache.org/install.html)
+3. There is a bash script file that make the running project easier named `run.sh` in the project's root, so you can run it and after downloading images and building the application will be served. The docker composer will serve the main application, Mysql and phpMyAdmin.
+4. The Project will be served on port `8000` automatically, if you want change this, you can alter this on the `docker-compose.yml` file in the project`s root.
 
 **NOTE:** There is a `request.sh` file in the project's root. please use this to test concurrency. it is same as the file that the assignment said but there is a simple change in the default port and IDs of each request data. I mean, I remove some of IDs to consider them as a new appointment and also remove the single quotation around IDs because they are `Integer` in this application.
 
