@@ -1,0 +1,69 @@
+{
+	"info": {
+		"_postman_id": "475f8068-8a84-41f2-a35d-c3702534405d",
+		"name": "Sesami",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "79397"
+	},
+	"item": [
+		{
+			"name": "Save Appointment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\"start\":\"2020-10-10 20:20\",\n\"end\":\"2020-10-10 20:45\",\n\"createdAt\":\"2020-09-02 14:23:12\",\n\"updatedAt\":\"2020-09-28 14:23:12\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/appointments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"appointments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Appointments List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/appointments?start=2020-10-10 00:20&end=2020-10-10 23:45",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"appointments"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2020-10-10 00:20"
+						},
+						{
+							"key": "end",
+							"value": "2020-10-10 23:45"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
