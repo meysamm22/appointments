@@ -1,4 +1,31 @@
 # About The System
+Create a small service that will manage appointments. This service receives a high load of requests that can contain appointment data:
+The goal of this project is to assess your development skills suitable for a
+software developer position. It tests knowledge and proficiency with software
+design, unit testing and web technologies like HTTP and REST.
+
+{
+"id": Int,
+"start": Date, "end": Date, "createdAt": Date "updatedAt": Date
+}
+
+
+You will need to process each request and:
+
+• Make sure the appointment does not already exist, return an error
+message if the requested time range is not available
+
+• Make sure the data is valid, otherwise return an error message.
+
+• Update the previous appointment data if the same ID is received with
+updated information, while keeping the historical data
+
+• Make sure you always keep the latest updated information while
+keeping the historical data
+
+• Make sure your application can handle multiple concurrent requests
+
+
 This sample application is developed by using Java 11, Maven, Junit and Spring Boot framework. MySql is considered as the DBMS of this app but by a simple change in POM and application properties you can define your own DBMS.
 It has been tried to keep the code clean and decouple to other module or layers.
 JPA has been used as its main ORM and there is no need to define an initial sql file to create tables, so all tables will be created via DDL.
